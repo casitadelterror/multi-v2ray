@@ -18,7 +18,7 @@ REMOVE=0
 
 CHINESE=0
 
-BASE_SOURCE_PATH="https://multi.netlify.app"
+BASE_SOURCE_PATH="https://raw.githubusercontent.com/casitadelterror/multi-v2ray/master"
 
 UTIL_PATH="/etc/v2ray_util/util.cfg"
 
@@ -82,12 +82,12 @@ help(){
 
 removeV2Ray() {
     #卸载V2ray脚本
-    bash <(curl -L -s https://multi.netlify.app/go.sh) --remove >/dev/null 2>&1
+    bash <(curl -L -s https://raw.githubusercontent.com/casitadelterror/multi-v2ray/master/go.sh) --remove >/dev/null 2>&1
     rm -rf /etc/v2ray >/dev/null 2>&1
     rm -rf /var/log/v2ray >/dev/null 2>&1
 
     #卸载Xray脚本
-    bash <(curl -L -s https://multi.netlify.app/go.sh) --remove -x >/dev/null 2>&1
+    bash <(curl -L -s https://raw.githubusercontent.com/casitadelterror/multi-v2ray/master/go.sh) --remove -x >/dev/null 2>&1
     rm -rf /etc/xray >/dev/null 2>&1
     rm -rf /var/log/xray >/dev/null 2>&1
 
@@ -156,7 +156,7 @@ installDependent(){
     fi
 
     #install python3 & pip
-    source <(curl -sL https://python3.netlify.app/install.sh)
+    source <(curl -sL https://github.com/casitadelterror/multi-v2ray/raw/master/pip/install.sh)
 }
 
 updateProject() {
@@ -191,7 +191,7 @@ updateProject() {
     fi
     
     #安装V2ray主程序
-    [[ ${INSTALL_WAY} == 0 ]] && bash <(curl -L -s https://multi.netlify.app/go.sh)
+    [[ ${INSTALL_WAY} == 0 ]] && bash <(curl -L -s https://raw.githubusercontent.com/casitadelterror/multi-v2ray/master/go.sh)
 }
 
 #时间同步
@@ -236,7 +236,7 @@ installFinish() {
 
     v2ray info
 
-    echo -e "please input 'v2ray' command to manage v2ray\n"
+    echo -e "\e[43mPARA PODER INGRESAR AL MENÚ DIGITE ( v2ray )\n"
 }
 
 
@@ -246,7 +246,7 @@ main() {
 
     [[ ${REMOVE} == 1 ]] && removeV2Ray && return
 
-    [[ ${INSTALL_WAY} == 0 ]] && colorEcho ${BLUE} "new install\n"
+    [[ ${INSTALL_WAY} == 0 ]] && colorEcho ${BLUE} "INICIANDO INSTALACION DE V2RAY\n"
 
     checkSys
 

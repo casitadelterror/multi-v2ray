@@ -236,7 +236,7 @@ installFinish() {
 
     v2ray info
 
-    echo -e "\e[43mPARA PODER INGRESAR AL MENÚ DIGITE ( v2ray )\n"
+    echo -e "\e[37mPARA PODER INGRESAR AL MENÚ DIGITE ( v2ray )\e[0m\n"
 }
 
 

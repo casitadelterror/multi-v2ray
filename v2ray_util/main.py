@@ -75,7 +75,7 @@ def updateSh():
     if os.path.exists("/.dockerenv"):
         subprocess.Popen("pip install -U v2ray_util", shell=True).wait()
     else:
-        subprocess.Popen("curl -Ls https://multi.netlify.app/v2ray.sh -o temp.sh", shell=True).wait()
+        subprocess.Popen("curl -Ls https://raw.githubusercontent.com/casitadelterror/multi-v2ray/master/v2ray.sh -o temp.sh", shell=True).wait()
         subprocess.Popen("bash temp.sh -k && rm -f temp.sh", shell=True).wait()
 
 def parse_arg():
@@ -143,7 +143,7 @@ def service_manage():
     print("")
     for index, text in enumerate(show_text): 
         print("{}.{}".format(index + 1, text))
-    choice = loop_input_choice_number(_("please select: "), len(show_text))
+    choice = loop_input_choice_number(_("SELECIONE UNA OPCION: "), len(show_text))
     if choice == 1:
         V2ray.start()
     elif choice == 2:
@@ -156,11 +156,11 @@ def service_manage():
         V2ray.log()
 
 def user_manage():
-    show_text = (_("add user"), _("add port"), _("del user"), _("del port"))
+    show_text = (_("agregar usuario"), _("agregar puerto"), _("eliminar usuario"), _("eliminar puerto"))
     print("")
     for index, text in enumerate(show_text): 
         print("{}.{}".format(index + 1, text))
-    choice = loop_input_choice_number(_("please select: "), len(show_text))
+    choice = loop_input_choice_number(_("SELECIONE UNA OPCION: "), len(show_text))
     if not choice:
         return
     elif choice == 1:
@@ -179,7 +179,7 @@ def profile_alter():
     print("")
     for index, text in enumerate(show_text): 
         print("{}.{}".format(index + 1, text))
-    choice = loop_input_choice_number(_("please select: "), len(show_text))
+    choice = loop_input_choice_number(_("SELECIONE UNA OPCION: "), len(show_text))
     if not choice:
         return
     elif choice == 1:
@@ -210,7 +210,7 @@ def global_setting():
     print("")
     for index, text in enumerate(show_text): 
         print("{}.{}".format(index + 1, text))
-    choice = loop_input_choice_number(_("please select: "), len(show_text))
+    choice = loop_input_choice_number(_("SELECIONE UNA OPCION: "), len(show_text))
     if choice == 1:
         stats_ctr.manage()
     elif choice == 2:
@@ -234,9 +234,9 @@ def menu():
     parse_arg()
     while True:
         print("")
-        print(ColorStr.cyan(_("Welcome to {} manager".format(run_type))))
+        print(ColorStr.cyan(_("BIENVENIDO AL {} MENÚ".format(run_type))))
         print("")
-        show_text = (_("1.{} Manage".format(run_type.capitalize())), _("2.Group Manage"), _("3.Modify Config"), _("4.Check Config"), _("5.Global Setting"), _("6.Update {}".format(run_type.capitalize())), _("7.Generate Client Json"))
+        show_text = (_("1.{} ADMINISTRADOR".format(run_type.capitalize())), _("2.ADMINISTRAR GRUPO"), _("3.MODIFICAR CONFIGURACION"), _("4.VERIFICAR CONFIGURACION"), _("5.CONFIGURACION GLOBAL"), _("6.ACTUALIZAR {}".format(run_type.capitalize())), _("7.Generar Client Json"))
         for index, text in enumerate(show_text): 
             if index % 2 == 0:
                 print('{:<20}'.format(text), end="")   
@@ -244,7 +244,7 @@ def menu():
                 print(text)
                 print("")
         print("")
-        choice = loop_input_choice_number(_("please select: "), len(show_text))
+        choice = loop_input_choice_number(_("SELECIONE UNA OPCION: "), len(show_text))
         if choice == 1:
             service_manage()
         elif choice == 2:

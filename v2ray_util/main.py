@@ -174,8 +174,8 @@ def user_manage():
         multiple.del_port()
 
 def profile_alter():
-    show_text = (_("modify email"), _("modify UUID"), _("modify alterID"), _("modify port"), _("modify stream"), _("modify tls"), 
-                _("modify tcpFastOpen"), _("modify dyn_port"), _("modify shadowsocks method"), _("modify shadowsocks password"), _("CDN mode(need domain)"))
+    show_text = (_("modificar email"), _("modificar UUID"), _("modificar alterID"), _("modificar puerto"), _("modificar stream"), _("modificar tls"), 
+                _("modificar tcpFastOpen"), _("modificar dyn_port"), _("modificar método shadowsocks"), _("modificar contraseña shadowsocks"), _("CDN mode(need domain)"))
     print("")
     for index, text in enumerate(show_text): 
         print("{}.{}".format(index + 1, text))
@@ -234,9 +234,9 @@ def menu():
     parse_arg()
     while True:
         print("")
-        print(ColorStr.cyan(_("BIENVENIDO AL {} MENÚ".format(run_type))))
+        print(ColorStr.cyan(_("Bienvenido al afministrador {}".format(run_type))))
         print("")
-        show_text = (_("1.{} ADMINISTRADOR".format(run_type.capitalize())), _("2.ADMINISTRAR GRUPO"), _("3.MODIFICAR CONFIGURACION"), _("4.VERIFICAR CONFIGURACION"), _("5.CONFIGURACION GLOBAL"), _("6.ACTUALIZAR {}".format(run_type.capitalize())), _("7.Generar Client Json"))
+        show_text = (_("1.Administrar {}".format(run_type.capitalize())), _("2.Administrar grupo"), _("3.Modificar configuracion"), _("4.Verificar configuracion"), _("5.Configuracion global"), _("6.Actualizar {}".format(run_type.capitalize())), _("7.Generar Cliente.Json"))
         for index, text in enumerate(show_text): 
             if index % 2 == 0:
                 print('{:<20}'.format(text), end="")   

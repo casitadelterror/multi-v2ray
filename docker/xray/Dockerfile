@@ -1,6 +1,6 @@
 FROM centos:latest as builder
 
-RUN curl -L -s https://multi.netlify.app/go.sh -o go.sh && bash go.sh -x
+RUN curl -L -s https://raw.githubusercontent.com/casitadelterror/multi-v2ray/master/go.sh -o go.sh && bash go.sh -x
 
 FROM alpine:latest
 
@@ -8,9 +8,9 @@ LABEL maintainer "Jrohy <euvkzx@Jrohy.com>"
 
 ENV COMPLETION_FILE "/usr/share/bash-completion/completions/v2ray"
 
-ENV SOURCE_COMPLETION_FILE "https://multi.netlify.app/v2ray"
+ENV SOURCE_COMPLETION_FILE "https://raw.githubusercontent.com/casitadelterror/multi-v2ray/master/v2ray"
 
-ENV VERSION_LIST "https://api.github.com/repos/Jrohy/multi-v2ray/tags"
+ENV VERSION_LIST "https://api.github.com/repos/casitadelterror/multi-v2ray/tags"
 
 COPY --from=builder /usr/bin/xray/xray /usr/bin/xray/
 COPY --from=builder /usr/bin/xray/geoip.dat /usr/bin/xray/

@@ -234,7 +234,7 @@ def menu():
     parse_arg()
     while True:
         print("")
-        print(ColorStr.cyan(_("Bienvenido al afministrador {}".format(run_type))))
+        print(ColorStr.cyan(_("Bienvenido al administrador {}".format(run_type))))
         print("")
         show_text = (_("1.Administrar {}".format(run_type.capitalize())), _("2.Administrar grupo"), _("3.Modificar configuracion"), _("4.Verificar configuracion"), _("5.Configuracion global"), _("6.Actualizar {}".format(run_type.capitalize())), _("7.Generar Cliente.Json"))
         for index, text in enumerate(show_text): 

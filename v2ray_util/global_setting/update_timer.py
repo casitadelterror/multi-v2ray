@@ -22,7 +22,7 @@ def planUpdate():
     if Loader().profile.network == "ipv6":
         print(ColorStr.yellow("ipv6 not support!"))
         return
-    if Config().get_data("lang") == "zh":
+    if Config().get_data("lang") == "en":
         origin_time_zone = int(time.strftime("%z", time.gmtime())[0:-2])
         beijing_time_zone, beijing_update_time = 8, 3
         diff_zone = beijing_time_zone - origin_time_zone

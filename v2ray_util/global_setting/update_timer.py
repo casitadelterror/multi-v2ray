@@ -22,7 +22,7 @@ def planUpdate():
     if Loader().profile.network == "ipv6":
         print(ColorStr.yellow("ipv6 not support!"))
         return
-    if Config().get_data("lang") == "en":
+    if Config().get_data("lang") == "zh":
         origin_time_zone = int(time.strftime("%z", time.gmtime())[0:-2])
         beijing_time_zone, beijing_update_time = 8, 3
         diff_zone = beijing_time_zone - origin_time_zone
@@ -35,7 +35,7 @@ def planUpdate():
     else:
         local_time = 3
     os.system('echo "SHELL=/bin/bash" >> crontab.txt && echo "$(crontab -l)" >> crontab.txt')
-    os.system('echo "0 {} * * * bash <(curl -L -s https://multi.netlify.app/go.sh) {}| tee -a /root/{}Update.log && v2ray-util restart" >> crontab.txt'.format(local_time,"-x" if run_type == "xray" else "",run_type))
+    os.system('echo "0 {} * * * bash <(curl -L -s https://raw.githubusercontent.com/casitadelterror/multi-v2ray/master/go.sh) {}| tee -a /root/{}Update.log && v2ray-util restart" >> crontab.txt'.format(local_time,"-x" if run_type == "xray" else "",run_type))
     os.system("crontab crontab.txt && rm -f crontab.txt")
     restartCron()
     print(ColorStr.green(_("success open schedule update task!")))

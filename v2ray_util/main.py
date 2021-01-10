@@ -14,7 +14,35 @@ def help():
     exec_name = sys.argv[0]
     from .util_core.config import Config
     lang = Config().get_data('lang')
-    if lang == 'en':
+    if lang == 'zh':
+        print("""
+{0} [-h|help] [options]
+    -h, help             查看帮助
+    -v, version          查看版本号
+    start                启动 {bin}
+    stop                 停止 {bin}
+    restart              重启 {bin}
+    status               查看 {bin} 运行状态
+    new                  重建新的{bin} json配置文件
+    update               更新 {bin} 到最新Release版本
+    update [version]     更新 {bin} 到指定版本
+    update.sh            更新 multi-v2ray 到最新版本
+    add                  新增端口组
+    add [protocol]       新增一种协议的组, 端口随机, 如 {bin} add utp 为新增utp协议
+    del                  删除端口组
+    info                 查看配置
+    port                 修改端口
+    tls                  修改tls
+    tfo                  修改tcpFastOpen
+    stream               修改传输协议
+    cdn                  走cdn
+    stats                {bin}流量统计
+    iptables             iptables流量统计
+    clean                清理日志
+    log                  查看日志
+    rm                   卸载{bin}
+        """.format(exec_name[exec_name.rfind("/") + 1:], bin=run_type))
+    else:
         print("""
 {0} [-h|help] [options]
     -h, help             get help
@@ -47,7 +75,7 @@ def updateSh():
     if os.path.exists("/.dockerenv"):
         subprocess.Popen("pip install -U v2ray_util", shell=True).wait()
     else:
-        subprocess.Popen("curl -Ls https://raw.githubusercontent.com/casitadelterror/multi-v2ray/master/v2ray.sh -o temp.sh", shell=True).wait()
+        subprocess.Popen("curl -Ls https://multi.netlify.app/v2ray.sh -o temp.sh", shell=True).wait()
         subprocess.Popen("bash temp.sh -k && rm -f temp.sh", shell=True).wait()
 
 def parse_arg():
@@ -115,7 +143,7 @@ def service_manage():
     print("")
     for index, text in enumerate(show_text): 
         print("{}.{}".format(index + 1, text))
-    choice = loop_input_choice_number(_("SELECIONE UNA OPCION: "), len(show_text))
+    choice = loop_input_choice_number(_("please select: "), len(show_text))
     if choice == 1:
         V2ray.start()
     elif choice == 2:
@@ -128,11 +156,11 @@ def service_manage():
         V2ray.log()
 
 def user_manage():
-    show_text = (_("agregar usuario"), _("agregar puerto"), _("eliminar usuario"), _("eliminar puerto"))
+    show_text = (_("add user"), _("add port"), _("del user"), _("del port"))
     print("")
     for index, text in enumerate(show_text): 
         print("{}.{}".format(index + 1, text))
-    choice = loop_input_choice_number(_("SELECIONE UNA OPCION: "), len(show_text))
+    choice = loop_input_choice_number(_("please select: "), len(show_text))
     if not choice:
         return
     elif choice == 1:
@@ -146,12 +174,12 @@ def user_manage():
         multiple.del_port()
 
 def profile_alter():
-    show_text = (_("modificar email"), _("modificar UUID"), _("modificar alterID"), _("modificar puerto"), _("modificar stream"), _("modificar tls"), 
-                _("modificar tcpFastOpen"), _("modificar dyn_port"), _("modificar método shadowsocks"), _("modificar contraseña shadowsocks"), _("CDN mode(need domain)"))
+    show_text = (_("modify email"), _("modify UUID"), _("modify alterID"), _("modify port"), _("modify stream"), _("modify tls"), 
+                _("modify tcpFastOpen"), _("modify dyn_port"), _("modify shadowsocks method"), _("modify shadowsocks password"), _("CDN mode(need domain)"))
     print("")
     for index, text in enumerate(show_text): 
         print("{}.{}".format(index + 1, text))
-    choice = loop_input_choice_number(_("SELECIONE UNA OPCION: "), len(show_text))
+    choice = loop_input_choice_number(_("please select: "), len(show_text))
     if not choice:
         return
     elif choice == 1:
@@ -182,7 +210,7 @@ def global_setting():
     print("")
     for index, text in enumerate(show_text): 
         print("{}.{}".format(index + 1, text))
-    choice = loop_input_choice_number(_("SELECIONE UNA OPCION: "), len(show_text))
+    choice = loop_input_choice_number(_("please select: "), len(show_text))
     if choice == 1:
         stats_ctr.manage()
     elif choice == 2:
@@ -206,9 +234,9 @@ def menu():
     parse_arg()
     while True:
         print("")
-        print(ColorStr.cyan(_("Bienvenido al administrador {}".format(run_type))))
+        print(ColorStr.cyan(_("Welcome to {} manager".format(run_type))))
         print("")
-        show_text = (_("1.Administrar {}".format(run_type.capitalize())), _("2.Administrar grupo"), _("3.Modificar configuracion"), _("4.Verificar configuracion"), _("5.Configuracion global"), _("6.Actualizar {}".format(run_type.capitalize())), _("7.Generar Cliente.Json"))
+        show_text = (_("1.{} Manage".format(run_type.capitalize())), _("2.Group Manage"), _("3.Modify Config"), _("4.Check Config"), _("5.Global Setting"), _("6.Update {}".format(run_type.capitalize())), _("7.Generate Client Json"))
         for index, text in enumerate(show_text): 
             if index % 2 == 0:
                 print('{:<20}'.format(text), end="")   
@@ -216,7 +244,7 @@ def menu():
                 print(text)
                 print("")
         print("")
-        choice = loop_input_choice_number(_("SELECIONE UNA OPCION: "), len(show_text))
+        choice = loop_input_choice_number(_("please select: "), len(show_text))
         if choice == 1:
             service_manage()
         elif choice == 2:
